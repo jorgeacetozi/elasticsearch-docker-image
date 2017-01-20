@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     node1.vm.hostname = "node1"
     node1.vm.network "private_network", ip: "10.0.0.10"
     node1.vm.provision "shell",
-        inline: "docker rm -f node1 || docker run -d \
+        inline: "docker rm -f node1 || true && docker run -d \
                    --name node1 \
                    --net=host \
                    --privileged \
@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
     node2.vm.hostname = "node2"
     node2.vm.network "private_network", ip: "10.0.0.20"
     node2.vm.provision "shell",
-        inline: "docker rm -f node2 || docker run -d \
+        inline: "docker rm -f node2 || true && docker run -d \
                    --name node2 \
                    --net=host \
                    --privileged \
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     node3.vm.hostname = "node3"
     node3.vm.network "private_network", ip: "10.0.0.30"
     node3.vm.provision "shell",
-        inline: "docker rm -f node3 || docker run -d \
+        inline: "docker rm -f node3 || true && docker run -d \
                    --name node3 \
                    --net=host \
                    --privileged \

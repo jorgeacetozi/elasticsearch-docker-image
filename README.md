@@ -1,20 +1,20 @@
 # Bootstrap a 2-node Elasticsearch cluster locally using Docker
 - **Start node1**
 
-`docker rm -f node1 || docker run -d --name node1 --net=host --privileged -p 9200-9400:9200-9400 -e CLUSTER_NAME=my-cluster -e NODE_NAME=node1 -e ES_HEAP_SIZE=512m jorgeacetozi/elasticsearch:2.3.5`
+`$ docker rm -f node1 || true && docker run -d --name node1 --net=host --privileged -p 9200-9400:9200-9400 -e CLUSTER_NAME=my-cluster -e NODE_NAME=node1 -e ES_HEAP_SIZE=512m jorgeacetozi/elasticsearch:2.3.5`
 
 - **Start node2**
 
-`docker rm -f node2 || docker run -d --name node2 --net=host --privileged -p 9200-9400:9200-9400 -e CLUSTER_NAME=my-cluster -e NODE_NAME=node2 -e ES_HEAP_SIZE=512m jorgeacetozi/elasticsearch:2.3.5`
+`$ docker rm -f node2 || true && docker run -d --name node2 --net=host --privileged -p 9200-9400:9200-9400 -e CLUSTER_NAME=my-cluster -e NODE_NAME=node2 -e ES_HEAP_SIZE=512m jorgeacetozi/elasticsearch:2.3.5`
 
 Now just issue `http://localhost:9200/_plugin/head` in the browser.
 
 # Bootstrap a 3-node Elasticsearch cluster using Vagrant
-- Just clone my GitHub repository and vagrant up!
+Just clone my GitHub repository and vagrant up!
 
-`$ git clone git@github.com:jorgeacetozi/elasticsearch-docker-image.git`
-`$ cd elasticsearch-docker-image/vagrant`
-`$ vagrant up`
+- `$ git clone git@github.com:jorgeacetozi/elasticsearch-docker-image.git`
+- `$ cd elasticsearch-docker-image/vagrant`
+- `$ vagrant up`
 
 Now just issue `http://10.0.0.10:9200/_plugin/head` in the browser.
 
