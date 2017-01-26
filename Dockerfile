@@ -7,8 +7,11 @@ MAINTAINER Jorge Acetozi
 # Define default environment variables
 ENV ELASTICSEARCH_VERSION=2.3.5
 ENV ELASTICSEARCH_HOME=/opt/elasticsearch
-ENV ELASTICSEARCH_CONFIG_FILE=$ELASTICSEARCH_HOME/config/elasticsearch.yml
 ENV ES_HEAP_SIZE=1024m
+ENV IS_MASTER_ELEGIBLE_NODE=true
+ENV IS_DATA_NODE=true
+ENV LOCK_MEMORY=false
+ENV MINIMUM_MASTER_NODES=1
 
 # Create elasticsearch group and user
 RUN groupadd -g 1000 elasticsearch \
