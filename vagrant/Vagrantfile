@@ -19,6 +19,9 @@ Vagrant.configure("2") do |config|
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node1 \
+                   -e LOCK_MEMORY=true \
+                   --ulimit memlock=-1:-1 \
+                   --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.10 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
                    -e ES_HEAP_SIZE=512m \
@@ -36,6 +39,9 @@ Vagrant.configure("2") do |config|
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node2 \
+                   -e LOCK_MEMORY=true \
+                   --ulimit memlock=-1:-1 \
+                   --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.20 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
                    -e ES_HEAP_SIZE=512m \
@@ -53,6 +59,9 @@ Vagrant.configure("2") do |config|
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node3 \
+                   -e LOCK_MEMORY=true \
+                   --ulimit memlock=-1:-1 \
+                   --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.30 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
                    -e ES_HEAP_SIZE=512m \
