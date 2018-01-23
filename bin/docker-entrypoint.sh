@@ -3,12 +3,8 @@ set -e
 
 sed -i "s/CLUSTER_NAME/$CLUSTER_NAME/
   s/NODE_NAME/$NODE_NAME/
-  s/IS_MASTER_ELEGIBLE_NODE/$IS_MASTER_ELEGIBLE_NODE/
-  s/IS_DATA_NODE/$IS_DATA_NODE/
-  s/LOCK_MEMORY/$LOCK_MEMORY/
   s/NETWORK_HOST/$NETWORK_HOST/
-  s/UNICAST_HOSTS/$UNICAST_HOSTS/
-  s/MINIMUM_MASTER_NODES/$MINIMUM_MASTER_NODES/" ./config/elasticsearch.yml
+  s/UNICAST_HOSTS/$UNICAST_HOSTS/" ./config/elasticsearch.yml
 
 echo -e "Starting Elasticsearch $ELASTICSEARCH_VERSION"
 exec /opt/elasticsearch/bin/elasticsearch
