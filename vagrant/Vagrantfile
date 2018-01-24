@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$script = <<SCRIPT
+sysctl -w vm.max_map_count=262144
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = "coreos-alpha"
 
@@ -11,61 +15,57 @@ Vagrant.configure("2") do |config|
   config.vm.define "elasticsearch_node1" do |node1|
     node1.vm.hostname = "node1"
     node1.vm.network "private_network", ip: "10.0.0.10"
+    node1.vm.provision "shell", inline: $script
     node1.vm.provision "shell",
-        inline: "docker rm -f node1 || true && docker run -d \
+        inline: "docker container rm -f node1 || true && docker container run -d \
                    --name node1 \
                    --net=host \
                    --privileged \
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node1 \
-                   -e LOCK_MEMORY=true \
                    --ulimit memlock=-1:-1 \
                    --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.10 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
-                   -e ES_HEAP_SIZE=512m \
-                   jorgeacetozi/elasticsearch:2.3.5"
+                   jorgeacetozi/elasticsearch:5.6.6"
   end
 
   config.vm.define "elasticsearch_node2" do |node2|
     node2.vm.hostname = "node2"
     node2.vm.network "private_network", ip: "10.0.0.20"
+    node2.vm.provision "shell", inline: $script
     node2.vm.provision "shell",
-        inline: "docker rm -f node2 || true && docker run -d \
+        inline: "docker container rm -f node2 || true && docker container run -d \
                    --name node2 \
                    --net=host \
                    --privileged \
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node2 \
-                   -e LOCK_MEMORY=true \
                    --ulimit memlock=-1:-1 \
                    --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.20 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
-                   -e ES_HEAP_SIZE=512m \
-                   jorgeacetozi/elasticsearch:2.3.5"
+                   jorgeacetozi/elasticsearch:5.6.6"
   end
 
   config.vm.define "elasticsearch_node3" do |node3|
     node3.vm.hostname = "node3"
     node3.vm.network "private_network", ip: "10.0.0.30"
+    node3.vm.provision "shell", inline: $script
     node3.vm.provision "shell",
-        inline: "docker rm -f node3 || true && docker run -d \
+        inline: "docker container rm -f node3 || true && docker container run -d \
                    --name node3 \
                    --net=host \
                    --privileged \
                    -p 9200-9400:9200-9400 \
                    -e CLUSTER_NAME=my-cluster \
                    -e NODE_NAME=node3 \
-                   -e LOCK_MEMORY=true \
                    --ulimit memlock=-1:-1 \
                    --ulimit nofile=65536:65536 \
                    -e NETWORK_HOST=10.0.0.30 \
                    -e UNICAST_HOSTS='10.0.0.10:9300, 10.0.0.20:9300, 10.0.0.30:9300' \
-                   -e ES_HEAP_SIZE=512m \
-                   jorgeacetozi/elasticsearch:2.3.5"
+                   jorgeacetozi/elasticsearch:5.6.6"
   end
-
 end
