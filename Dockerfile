@@ -35,10 +35,6 @@ RUN chown -R elasticsearch:elasticsearch $ELASTICSEARCH_HOME /var/data/elasticse
 # Run the container as elasticsearch user
 USER elasticsearch
 
-# Install Elasticsearch monitoring plugins
-# RUN ./bin/plugin install mobz/elasticsearch-head \
-#  && ./bin/plugin install royrusso/elasticsearch-HQ
-
 # Define mountable directories
 VOLUME /var/data/elasticsearch
 VOLUME /var/log/elasticsearch
